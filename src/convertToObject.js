@@ -7,6 +7,19 @@
  */
 function convertToObject(sourceString) {
   // write your code here
+  const cssProperties = sourceString.split(';');
+  const cleanedCssProperties = cssProperties
+    .map((str) => str.trim())
+    .filter((str) => str.length > 0);
+
+  const keyValuePairs = cleanedCssProperties.map((str) => str.split(':'));
+  const keyValuePairsWithoutSpaces = keyValuePairs.map((arr) => {
+    return { [arr[0].trim()]: arr[1].trim() };
+  });
+
+  const result = Object.assign({}, ...keyValuePairsWithoutSpaces);
+
+  return result;
 }
 
 module.exports = convertToObject;
